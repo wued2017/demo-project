@@ -12,7 +12,10 @@ npm install
 npm run dev
 
 # build for production with minification
+npm run dll
 npm run build
+在dist/index.html首先引入
+  <script type=text/javascript src="/static/js/vendor.dll.js"></script>
 
 # build for production and view the bundle analyzer report
 npm run build --report
@@ -23,7 +26,7 @@ npm run unit
 # run e2e tests
 npm run e2e
 
-# run all tests
+# run all tests
 npm test
 ```
 
