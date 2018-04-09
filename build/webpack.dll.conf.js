@@ -6,7 +6,7 @@ module.exports = {
     vendor: ['vue/dist/vue.esm.js','vue-router', 'vuex', 'axios']
   },
   output: {
-    path: path.join(__dirname, '../static/js'), // 打包后文件输出的位置
+    path: path.join(__dirname, '../static/dll'), // 打包后文件输出的位置
     filename: '[name].dll.js',
     library: '[name]_library'
   },

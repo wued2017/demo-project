@@ -6,7 +6,7 @@ import Vue from 'vue'
 import Router from '@/router'
 let baseURL = AppConfig.baseUrl
 
-// const baseURL = 'api/mock/'
+// const baseURL = 'api/mock/' // 跨域
 // 请求时的拦截器
 Axios.interceptors.request.use(
   config => {

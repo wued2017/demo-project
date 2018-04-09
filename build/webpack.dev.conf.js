@@ -65,7 +65,12 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         ignore: ['.*']
       }
     ])
-  ]
+  ],
+  resolve: {
+    alias: {
+      'appConfig': resolve('src/services/http/config.js')
+    }
+  }
 })
 
 module.exports = new Promise((resolve, reject) => {
