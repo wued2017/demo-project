@@ -3,7 +3,7 @@ const webpack = require("webpack")
 
 module.exports = {
   entry: {
-    vendor: ['vue/dist/vue.esm.js','vue-router']
+    vendor: ['vue/dist/vue.esm.js','vue-router', 'vuex', 'axios']
   },
   output: {
     path: path.join(__dirname, '../static/js'), // 打包后文件输出的位置
