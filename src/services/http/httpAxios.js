@@ -1,9 +1,9 @@
 import Axios from 'axios'
-import { Message } from 'element-ui'
 import AppConfig from './config'
 
 import Vue from 'vue'
 import Router from '@/router'
+
 let baseURL = AppConfig.baseUrl
 
 // const baseURL = 'api/mock/' // 跨域
@@ -59,13 +59,14 @@ function errorState (params) {
     return params.error
   } else {
     // 状态码异常
-    Message({
+    this.$message({
       showClose: true,
       message: `请求服务器错误，Code：${params.error.status}(${params.url})`,
       type: 'error'
     })
   }
 }
+
 function transformResponseCode (code) {
   /**
    * 转换后端数据
@@ -90,6 +91,7 @@ function transformResponseCode (code) {
   }
   return errType
 }
+
 function innerError (res, showError, url) {
   /**
    * 处理服务器内部错误
@@ -104,7 +106,7 @@ function innerError (res, showError, url) {
     // 状态码异常
     if (showError) {
       // 显示错误提示
-      Message({
+      this.$message({
         showClose: true,
         message: res.data.message !== '' ? res.data.message : `错误：${errType}(${res.url})`,
         type: 'error'
@@ -115,6 +117,7 @@ function innerError (res, showError, url) {
     }
   }
 }
+
 function successState (params) {
   /**
    * 服务器请求错误
@@ -125,11 +128,11 @@ function successState (params) {
    * @author zdd update (2018/1/2)
    * */
   if (params.res && params.res.status === 200) {
-    innerError(params.res, params.showError, params.url)  // 服务器请求错误
+    innerError(params.res, params.showError, params.url)
     return params.res
   } else if (params.res && params.res.status > 200) {
     // 状态码异常
-    Message({
+    this.$message({
       showClose: true,
       message: `服务器请求错误，Code：${params.res.status}(${params.url})`,
       type: 'error'
@@ -149,13 +152,13 @@ export default (options, data, headers) => {
    * @return response
    * @author wyl  update(2017-11-29)
    * */
-    // 是否开启错误提示,默认开启(不传showError)
+  // 是否开启错误提示,默认开启(不传showError)
   let showError = options.showError === undefined ? true : options.showError
-    // 公共参数
+  // 公共参数
   let Public = {
     // 'testParam': " "
   }
-    // http默认配置
+  // http默认配置
   let httpDefaultOptions = {
     // 请求协议 (post or get)
     method: options.method,
@@ -164,7 +167,7 @@ export default (options, data, headers) => {
     // 请求的api地址
     url: options.url,
     // 超时时间(ms)
-    timeout: 60000,    // 设置稍长一点的时间，解决接口超时严重时，【请求被拦截】的情况
+    timeout: 60000,
     // get 请求时带的参数
     params: Object.assign(Public, data),
     // post 请求的数据
@@ -172,13 +175,13 @@ export default (options, data, headers) => {
     // 请求头信息headers
     headers: headers || options.method === 'get' ? {} : {'Content-Type': 'application/json;charset=UTF-8'}
   }
-    // 请求协议对应的方法
+  // 请求协议对应的方法
   if (options.method === 'get') {
     delete httpDefaultOptions.data
   } else {
     delete httpDefaultOptions.params
   }
-    // 返回promise对象
+  // 返回promise对象
   return new Promise((resolve, reject) => {
     Axios(httpDefaultOptions)
       .then((res) => {
